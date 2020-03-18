@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<div class="box-body table-responsive">
-					<table class="table table-hover" id="table">
+					<table class="table table-hover" id="table" style="min-height: 500px; width:100%;">
 						<thead>
 							<tr>
 								<th class="text-center">#</th>
@@ -85,7 +85,7 @@
 												</button>
 												<ul class="dropdown-menu" role="menu">
 													<li>
-														<a href="javascript:;" onclick="editOM('<?=$key->id;?>', '<?=$key->nama;?>');" title="Edit">
+														<a href="<?=site_url();?>admin/anggota/edit/<?=$key->id;?>" title="Edit">
 															<i class="fa fa-pencil"></i> Edit
 														</a>
 													</li>
@@ -129,33 +129,24 @@
 </section>
 <!-- /.content -->
 
-<form action="<?=site_url('admin/list_kode/update');?>" method="post">
-	<div class="modal fade" id="modal-edit">
+<form action="<?=site_url();?>admin/anggota/reset" method="post">
+	<div class="modal fade" id="modal-reset">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Edit <span id="name_edit"></span></h4>
+					<h4 class="modal-title">Reset Password <span id="name_reset"></span></h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="group_list_text_e">Group List</label>
-						<input type="text" class="form-control" id="group_list_text_e" name="group_list_text_e">
-					</div>
-					<div class="form-group">
-						<label for="id_list_e">ID List</label>
-						<input type="number" class="form-control" id="id_list_e" name="id_list_e">
-					</div>
-					<div class="form-group">
-						<label for="keterangan_e">Keterangan</label>
-						<input type="text" class="form-control" id="keterangan_e" name="keterangan_e">
+						<label for="reset_password">New Password</label>
+						<input type="password" class="form-control" id="reset_password" name="reset_password" required>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<input type="hidden" id="id_e" name="id_e">
-					<input type="hidden" id="group_list_e" name="group_list_e">
+					<input type="text" id="id_anggota_reset" name="id_anggota_reset">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="primary" class="btn btn-primary">Save changes</button>
+					<button type="submit" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
 		</div>

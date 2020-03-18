@@ -26,9 +26,8 @@ class AnggotaController extends CI_Controller {
 		$data['content']     = 'anggota/form';
 		$data['vitamin']     = 'anggota/form_vitamin';
 		$data['arr_jabatan'] = $this->mcore->get('list_kode', '*', ['group_list' => 'jabatan'], 'id_list', 'ASC', NULL, NULL);
-
+		
 		$this->template->template($data);
-
 	}
 
 	public function store()
@@ -83,42 +82,90 @@ class AnggotaController extends CI_Controller {
 		if($exec){
 			$this->session->set_flashdata('success', 'Tambah Data Berhasil');
 		}else{
-			$this->session->set_flashdata('success', 'Update Data Gagal');
+			$this->session->set_flashdata('success', 'Tambah Data Gagal');
 		}
 
 		redirect(site_url('admin/anggota/create'), 'refresh');
 	}
 
+	public function edit($id)
+	{
+		$data['title']       = 'Edit Anggota';
+		$data['content']     = 'anggota/form_edit';
+		$data['vitamin']     = 'anggota/form_edit_vitamin';
+		$data['arr']         = $this->mcore->get('anggota', '*', ['id' => $id], NULL, 'ASC', NULL, NULL);
+		$data['arr_jabatan'] = $this->mcore->get('list_kode', '*', ['group_list' => 'jabatan'], 'id_list', 'ASC', NULL, NULL);
+		$data['tgl_lhr_obj'] = new DateTime();
+		
+		$this->template->template($data);
+	}
+
 	public function update()
 	{
-		$id         = $this->input->post('id_e', TRUE);
-		$group_list = $this->input->post('group_list_e', TRUE);
-		$id_list    = $this->input->post('id_list_e', TRUE);
-		$keterangan = $this->input->post('keterangan_e', TRUE);
+		$tgl_lhr_obj   = new DateTime();
+		$id            = $this->input->post('id', TRUE);
+		$prev_foto     = $this->input->post('prev_foto', TRUE);
+		$foto          = $prev_foto;
+		$nama          = $this->input->post('nama', TRUE);
+		$tempat_lahir  = $this->input->post('tempat_lahir', TRUE);
+		$tanggal_lahir = $tgl_lhr_obj->createFromFormat('d-m-Y', $this->input->post('tanggal_lahir', TRUE))->format('Y-m-d');
+		$jenis_kelamin = $this->input->post('jenis_kelamin', TRUE);
+		$no_ktp        = $this->input->post('no_ktp', TRUE);
+		$alamat        = $this->input->post('alamat', TRUE);
+		$no_telp       = $this->input->post('no_telp', TRUE);
+		$id_jabatan    = $this->input->post('id_jabatan', TRUE);
+		
+		# cek foto ada apa engga
+		$config['upload_path']   = './assets/img/foto/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']      = 10024; // 10 MB
+		$config['encrypt_name']  = TRUE;
+		$this->load->library('upload', $config);
+		if($this->upload->do_upload('foto')){
+			$data_upload = $this->upload->data();
+			$foto = $data_upload['file_name'];
+		}
+		# end cek foto ada apa engga
 
-		$data = compact('group_list', 'id_list', 'keterangan');
-		$where = ['id' => $id];
-		$exec = $this->mcore->update('list_kode', $data, $where);
+		$data = compact('nama', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'no_ktp', 'alamat', 'no_telp', 'id_jabatan', 'foto');
+		$exec = $this->mcore->update('anggota', $data, ['id' => $id]);
 
 		if($exec){
 			$this->session->set_flashdata('success', 'Update Data Berhasil');
-			redirect(site_url('admin/list_kode'), 'refresh');
 		}else{
 			$this->session->set_flashdata('success', 'Update Data Gagal');
-			redirect(site_url('admin/list_kode'), 'refresh');
 		}
+
+		redirect(site_url('admin/anggota'), 'refresh');
 	}
 
 	public function destroy($id)
 	{
-		$exec = $this->mcore->delete('list_kode', ['id' => $id]);
+		$exec = $this->mcore->delete('anggota', ['id' => $id]);
 
 		if($exec){
 			$this->session->set_flashdata('success', 'Delete Data Berhasil');
-			redirect(site_url('admin/list_kode'), 'refresh');
 		}else{
 			$this->session->set_flashdata('success', 'Delete Data Gagal');
-			redirect(site_url('admin/list_kode'), 'refresh');
+		}
+		redirect(site_url('admin/anggota'), 'refresh');
+	}
+
+	public function reset()
+	{
+		$id             = $this->input->post('id_anggota_reset', TRUE);
+		$reset_password = password_hash($this->input->post('reset_password', TRUE).UYAH, PASSWORD_DEFAULT);
+
+		$data  = ['password_login' => $reset_password];
+		$where = ['id' => $id];
+		$exec  = $this->mcore->update('anggota', $data, $where);
+
+		if($exec){
+			$this->session->set_flashdata('success', 'Reset Password Berhasil');
+			redirect(site_url('admin/anggota'), 'refresh');
+		}else{
+			$this->session->set_flashdata('success', 'Reset Password Gagal');
+			redirect(site_url('admin/anggota'), 'refresh');
 		}
 	}
 

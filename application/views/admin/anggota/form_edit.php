@@ -1,6 +1,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>Tambah Anggota </h1>
+	<h1>Edit Anggota </h1>
 </section>
 
 <!-- Main content -->
@@ -37,7 +37,7 @@
 
 		<div class="col-md-6 col-sm-6 col-xs-12">
 
-			<form action="<?=site_url('admin/anggota/store');?>" method="post" enctype="multipart/form-data">
+			<form action="<?=site_url('admin/anggota/update');?>" method="post" enctype="multipart/form-data">
 				<div class="box box-primary">
 					<div class="box-header">
 						<h3 class="box-title">Form Anggota</h3>
@@ -45,59 +45,51 @@
 					<div class="box-body">
 						<div class="form-group">
 							<label for="nama">Nama</label>
-							<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" value="<?=($this->session->flashdata('nama_temp'))?$this->session->flashdata('nama_temp'):NULL;?>" required>
+							<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" value="<?=$arr->row()->nama;?>" required>
 						</div>
 						<div class="form-group">
 							<label for="tempat_lahir">Tempat Lahir</label>
-							<input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" value="<?=($this->session->flashdata('tempat_lahir_temp'))?$this->session->flashdata('tempat_lahir_temp'):NULL;?>">
+							<input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" value="<?=$arr->row()->tempat_lahir;?>">
 						</div>
 						<div class="form-group">
 							<label for="tanggal_lahir">Tanggal Lahir</label>
-							<input type="text" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" value="<?=($this->session->flashdata('tanggal_lahir_temp'))?$this->session->flashdata('tanggal_lahir_temp'):NULL;?>">
+							<input type="text" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" value="<?=$tgl_lhr_obj->createFromFormat('Y-m-d', $arr->row()->tanggal_lahir)->format('d-m-Y');?>">
 						</div>
 						<div class="form-group">
 							<label for="jenis_kelamin">Jenis Kelamin</label>
 							<select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
 								<option value="laki - laki" 
-								<?=($this->session->flashdata('jenis_kelamin_temp') == 'laki - laki')?'selected':'';?>
+								<?=($arr->row()->jenis_kelamin == 'laki - laki')?'selected':'';?>
 								>Laki-Laki</option>
 								<option value="perempuan" 
-								<?=($this->session->flashdata('jenis_kelamin_temp') == 'perempuan')?'selected':'';?>
+								<?=($arr->row()->jenis_kelamin == 'perempuan')?'selected':'';?>
 								>Perempuan</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label for="no_ktp">No KTP</label>
-							<input type="number" class="form-control" id="no_ktp" name="no_ktp" placeholder="No KTP" value="<?=($this->session->flashdata('no_ktp_temp'))?$this->session->flashdata('no_ktp_temp'):NULL;?>">
+							<input type="number" class="form-control" id="no_ktp" name="no_ktp" placeholder="No KTP" value="<?=$arr->row()->no_ktp;?>">
 						</div>
 						<div class="form-group">
 							<label for="alamat">Alamat</label>
-							<input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="<?=($this->session->flashdata('alamat_temp'))?$this->session->flashdata('alamat_temp'):NULL;?>">
+							<input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="<?=$arr->row()->alamat;?>">
 						</div>
 						<div class="form-group">
 							<label for="no_telp">No Telepon</label>
-							<input type="number" class="form-control" id="no_telp" name="no_telp" placeholder="No Telepon" value="<?=($this->session->flashdata('no_telp_temp'))?$this->session->flashdata('no_telp_temp'):NULL;?>">
+							<input type="number" class="form-control" id="no_telp" name="no_telp" placeholder="No Telepon" value="<?=$arr->row()->no_telp;?>">
 						</div>
 						<div class="form-group">
-							<label for="id_jabatan">Jabatan</label>
+							<label for="id_jabatan">Jabatan <?=$arr->row()->id_jabatan;?></label>
 							<select class="form-control" id="id_jabatan" name="id_jabatan">
 								<option value=""></option>
 								<?php
 								foreach ($arr_jabatan->result() as $key_jabatan) {
 									?>
 									<option value="<?=$key_jabatan->id_list;?>" 
-										<?=($this->session->flashdata('id_jabatan_temp') == $key_jabatan->id_list)?'selected':'';?>
+										<?=($arr->row()->id_jabatan == $key_jabatan->id_list)?'selected':'';?>
 										><?=$key_jabatan->keterangan;?></option>
 									<?php } ?>
 								</select>
-							</div>
-							<div class="form-group">
-								<label for="user_login">User Login</label>
-								<input type="text" class="form-control" id="user_login" name="user_login" placeholder="User Login" value="<?=($this->session->flashdata('user_login_temp'))?$this->session->flashdata('user_login_temp'):NULL;?>">
-							</div>
-							<div class="form-group">
-								<label for="password_login">Password Login</label>
-								<input type="password" class="form-control" id="password_login" name="password_login" placeholder="Password Login">
 							</div>
 							<div class="form-group">
 								<label for="foto">Foto</label>
@@ -105,7 +97,9 @@
 							</div>
 						</div>
 						<div class="box-footer">
-							<button type="submit" name="uploadFile" class="btn btn-primary btn-block" id="submit">Tambah</button>
+							<input type="text" id="id" name="id" value="<?=$arr->row()->id;?>">
+							<input type="text" id="prev_foto" name="prev_foto" value="<?=$arr->row()->foto;?>">
+							<button type="submit" class="btn btn-primary btn-block" id="submit">Edit</button>
 							<a href="<?=site_url('admin/anggota');?>" class="btn btn-default btn-block">Kembali ke list Anggota</a>
 						</div>
 					</div>

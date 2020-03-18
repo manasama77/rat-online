@@ -40,6 +40,14 @@
 							<input type="number" class="form-control" id="th_buku" name="th_buku" placeholder="Tahun Buku" value="<?=($this->session->flashdata('th_buku_temp'))?$this->session->flashdata('th_buku_temp'):NULL;?>" min="2000" max="9999">
 						</div>
 						<div class="form-group">
+							<label for="polling_mulai">Polling Ketua Mulai</label>
+							<input type="text" class="form-control" id="polling_mulai" name="polling_mulai" placeholder="Polling Ketua Mulai" value="<?=($this->session->flashdata('polling_mulai_temp'))?$this->session->flashdata('polling_mulai_temp'):NULL;?>">
+						</div>
+						<div class="form-group">
+							<label for="polling_akhir">Polling Ketua Akhir</label>
+							<input type="text" class="form-control" id="polling_akhir" name="polling_akhir" placeholder="Polling Ketua Akhir" value="<?=($this->session->flashdata('polling_akhir_temp'))?$this->session->flashdata('polling_akhir_temp'):NULL;?>">
+						</div>
+						<div class="form-group">
 							<label for="rat_mulai">RAT Mulai</label>
 							<input type="text" class="form-control" id="rat_mulai" name="rat_mulai" placeholder="RAT Mulai" value="<?=($this->session->flashdata('rat_mulai_temp'))?$this->session->flashdata('rat_mulai_temp'):NULL;?>">
 						</div>

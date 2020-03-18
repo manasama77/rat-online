@@ -60,7 +60,7 @@ class LoginAdminController extends CI_Controller {
 				
 				$this->session->set_userdata($data_session);
 				$this->session->set_flashdata('first_login', 'Login Berhasil');
-				redirect('admin/dashboard','refresh');
+				redirect('admin/rat','refresh');
 			}
 		}
 	}

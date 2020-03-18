@@ -49,7 +49,7 @@
 		let ask = confirm(`Delete ${keterangan}`);
 
 		if(ask == true){
-			window.location.replace(`<?=site_url();?>admin/list_kode/destroy/${id}`);
+			window.location.replace(`<?=site_url();?>admin/rat/destroy/${id}`);
 		}
 
 	}
