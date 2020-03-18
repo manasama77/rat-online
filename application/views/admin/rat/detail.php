@@ -22,86 +22,15 @@
 						</a>
 					</div>
 				</div>
-				<div class="box-body table-responsive">
-					<table class="table table-hover" id="table" style="min-height: 300px; width: 100%;">
-						<thead>
-							<tr>
-								<th class="text-center">#</th>
-								<th class="text-center"><i class="fa fa-cogs"></i></th>
-								<th class="text-center">ID RAT</th>
-								<th>Tahun Buku</th>
-								<th>Periode RAT</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							if($arr->num_rows() > 0){
-								foreach ($arr->result() as $key) {
-									?>
-									<tr>
-										<td><?=$key->id;?></td>
-										<td class="text-center">
-											<div class="btn-group">
-												<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">Action</button>
-												<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">
-													<span class="caret"></span>
-													<span class="sr-only">Toggle Dropdown</span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li>
-														<a href="javascript:;" onclick="editOM('<?=$key->id;?>', '<?=$key->kode_rat;?>');" title="Edit">
-															<i class="fa fa-pencil"></i> Edit
-														</a>
-													</li>
-													<li>
-														<a href="javascript:;" onclick="deleteOM('<?=$key->id;?>', '<?=$key->kode_rat;?>');" title="Delete">
-															<i class="fa fa-trash"></i> Delete
-														</a>
-													</li>
-													<li class="divider"></li>
-													<li>
-														<?php
-														if($key->status_rat == 0 || $key->status_rat == 2){
-														?>
-															<a href="javascript:;" onclick="lihatOM('<?=$key->id;?>');" title="Lihat">
-																<i class="fa fa-eye"></i> Lihat
-															</a>
-														<?php
-														}elseif($key->status_rat == 1){
-														?>
-															<a href="javascript:;" onclick="masukOM('<?=$key->id;?>');" title="Masuk">
-																<i class="fa fa-eye"></i> Masuk
-															</a>
-														<?php
-														}
-														?>
-													</li>
-												</ul>
-											</div>
-										</td>
-										<td><?=$key->kode_rat;?></td>
-										<td><?=$key->th_buku;?></td>
-										<td>
-											<?=$rat_mulai_obj->createFromFormat('Y-m-d', $key->rat_mulai)->format('d-M-Y');?> s/d 
-											<?=$rat_akhir_obj->createFromFormat('Y-m-d', $key->rat_akhir)->format('d-M-Y');?>
-										</td>
-										<td>
-											<?php
-											if($key->status_rat == 0){
-												echo 'Poling Ketua Sidang';
-											}elseif($key->status_rat == 1){
-												echo 'Aktif/ Berlangsung';
-											}elseif($key->status_rat == 2){
-												echo 'Close / Selesai';
-											}
-											?>
-										</td>
-									</tr>
-								<?php }?>
-							<?php } ?>
-						</tbody>
-					</table>
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-8 col-sm-12">
+							<h4 class="text-left">Kata Pengantar</h4>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<h4 class="text-center">Berkas Laporan RAT</h4>
+						</div>
+					</div>
 				</div>
 				<!-- <div class="box-footer">
 
