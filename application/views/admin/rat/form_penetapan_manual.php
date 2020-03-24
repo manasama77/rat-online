@@ -1,6 +1,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>Penetapan Manual Ketua Sidang </h1>
+	<h1>Penetapan Manual Ketua Sidang RAT <?=$kode_rat;?></h1>
 </section>
 
 <!-- Main content -->
@@ -30,6 +30,7 @@
 					</div>
 					<div class="box-footer">
 						<input type="text" id="id_rat" name="id_rat" value="<?=$id_rat;?>">
+						<input type="text" id="kode_rat" name="kode_rat" value="<?=$kode_rat;?>">
 						<button type="submit" class="btn btn-primary btn-block" id="submit">Pilih Ketua Sidang</button>
 						<a href="<?=site_url('admin/rat');?>" class="btn btn-default btn-block">Kembali Ke List RAT</a>
 					</div>

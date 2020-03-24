@@ -22,9 +22,11 @@ class TemplateAdmin
 		){
 			redirect('logout/admin');
 		}else{
-			$data['pp']   = base_url().'assets/img/avatars/avatar_default.png';
-			$data['uri2'] = $this->ci->uri->segment(2);
-			$data['uri3'] = $this->ci->uri->segment(3);
+			$data['pp']             = base_url().'assets/img/avatars/avatar_default.png';
+			$data['uri2']           = $this->ci->uri->segment(2);
+			$data['uri3']           = $this->ci->uri->segment(3);
+			$where_status_rat       = ['flag_aktif' => 'ya'];
+			$data['temp_arr_status_rat'] = $this->ci->mcore->get('rat', 'status_rat', $where_status_rat, NULL, 'DESC', 1, 0);
 
 			if(file_exists(APPPATH.'views/admin/'.$data['content'].'.php')){
 				$this->ci->load->view('layouts/admin/template', $data, FALSE);

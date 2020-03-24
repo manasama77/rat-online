@@ -32,19 +32,20 @@ class AnggotaController extends CI_Controller {
 
 	public function store()
 	{
-		$pesan_duplikat = '<mark>User Login</mark> telah terdaftar!<br>Silahkan gunakan User Login lainnya';
-		$foto           = 'default.png';
-		$tgl_lhr_obj    = new DateTime();
-		$nama           = $this->input->post('nama', TRUE);
-		$tempat_lahir   = $this->input->post('tempat_lahir', TRUE);
-		$tanggal_lahir  = $tgl_lhr_obj->createFromFormat('d-m-Y', $this->input->post('tanggal_lahir', TRUE))->format('Y-m-d');
-		$jenis_kelamin  = $this->input->post('jenis_kelamin', TRUE);
-		$no_ktp         = $this->input->post('no_ktp', TRUE);
-		$alamat         = $this->input->post('alamat', TRUE);
-		$no_telp        = $this->input->post('no_telp', TRUE);
-		$id_jabatan     = $this->input->post('id_jabatan', TRUE);
-		$user_login     = $this->input->post('user_login', TRUE);
-		$password_login = password_hash($this->input->post('password_login', TRUE).UYAH, PASSWORD_DEFAULT);
+		$pesan_duplikat    = '<mark>User Login</mark> telah terdaftar!<br>Silahkan gunakan User Login lainnya';
+		$foto              = 'default.png';
+		$tgl_lhr_obj       = new DateTime();
+		$nama              = $this->input->post('nama', TRUE);
+		$tempat_lahir      = $this->input->post('tempat_lahir', TRUE);
+		$tanggal_lahir     = $tgl_lhr_obj->createFromFormat('d-m-Y', $this->input->post('tanggal_lahir', TRUE))->format('Y-m-d');
+		$jenis_kelamin     = $this->input->post('jenis_kelamin', TRUE);
+		$no_ktp            = $this->input->post('no_ktp', TRUE);
+		$alamat            = $this->input->post('alamat', TRUE);
+		$no_telp           = $this->input->post('no_telp', TRUE);
+		$id_jabatan        = $this->input->post('id_jabatan', TRUE);
+		$user_login        = $this->input->post('user_login', TRUE);
+		$password_login    = password_hash($this->input->post('password_login', TRUE).UYAH, PASSWORD_DEFAULT);
+		$flag_ketua_sidang = 'tidak';
 
 		# cek duplikat
 		$count = $this->mcore->count('anggota', ['user_login' => $user_login]);
@@ -76,7 +77,7 @@ class AnggotaController extends CI_Controller {
 		}
 		# end cek foto ada apa engga
 
-		$data = compact('nama', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'no_ktp', 'alamat', 'no_telp', 'id_jabatan', 'user_login', 'password_login', 'foto');
+		$data = compact('nama', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'no_ktp', 'alamat', 'no_telp', 'id_jabatan', 'user_login', 'password_login', 'foto', 'flag_ketua_sidang');
 		$exec = $this->mcore->store('anggota', $data);
 
 		if($exec){

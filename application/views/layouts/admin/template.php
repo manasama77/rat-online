@@ -14,6 +14,10 @@
 	<link rel="stylesheet" href="<?=base_url();?>vendor/Ionicons/css/ionicons.min.css">
 	<!-- Datatables -->
 	<link rel="stylesheet" href="<?=base_url();?>vendor/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<!-- WYSIWYG -->
+	<link rel="stylesheet" href="<?=base_url();?>vendor/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+	<!-- SELECT2 -->
+	<link rel="stylesheet" href="<?=base_url();?>vendor/select2/css/select2.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="<?=base_url();?>assets/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -78,12 +82,27 @@
 	<script src="<?=base_url();?>vendor/bootstrap-datepicker/locales/bootstrap-datepicker.id.min.js"></script>
 	<script src="<?=base_url();?>vendor/datatables.net/js/jquery.dataTables.min.js"></script>
 	<script src="<?=base_url();?>vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<script src="<?=base_url();?>vendor/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+	<script src="<?=base_url();?>vendor/select2/js/select2.full.min.js"></script>
+	<script src="<?=base_url();?>vendor/select2/js/i18n/id.js"></script>
 	<script src="<?=base_url();?>assets/js/adminlte.min.js"></script>
 	<script>$('.sidebar-menu').tree();</script>
 
 </body>
 </html>
 
+<script>
+	//INIT PLUGIN 
+	/* select2 */
+	$('.select2').select2({
+		allowClear: true,
+		selectOnClose: false,
+		language: "id"
+	});
+	/* end select2 */
+	//INIT PLUGIN 
+</script>
 <!-- START VITAMIN -->
 <?php $this->load->view('admin/'.$vitamin); ?>
 <!-- END VITAMIN -->
+

@@ -4,7 +4,7 @@
       'paging'      : true,
       'lengthChange': false,
       'searching'   : true,
-      'ordering'    : true,
+      'ordering'    : false,
       'info'        : true,
       'autoWidth'   : false,
       'scrollX'			: false,
@@ -24,24 +24,19 @@
     });
 	});
 
-	function editOM(id, group_list, id_list, keterangan)
+	function aktifkanOM(id, kode_rat, aktifkan)
 	{
-		let name_edit         = $('#name_edit');
-		let id_e              = $('#id_e');
-		let group_list_text_e = $('#group_list_text_e');
-		let group_list_e      = $('#group_list_e');
-		let id_list_e         = $('#id_list_e');
-		let keterangan_e      = $('#keterangan_e');
+		let pesan = '';
+		if(aktifkan == 'aktifkan'){
+			pesan = 'Aktifkan ';
+		}else{
+			pesan = 'Non Aktifkan '
+		}
+		let ask = confirm(`${pesan} ${kode_rat} ?`);
 
-		name_edit.text(keterangan);
-		id_e.val(id).attr('readonly', true);
-		group_list_text_e.val(group_list).attr('readonly', true);
-		group_list_e.val(group_list);
-		id_list_e.val(id_list).attr('readonly', true);
-		keterangan_e.val(keterangan);
-
-		$('#modal-edit').modal('show');
-
+		if(ask == true){
+			window.location.replace(`<?=site_url();?>admin/rat/aktifkan/${id}/${aktifkan}`);
+		}
 	}
 
 	function deleteOM(id, keterangan)

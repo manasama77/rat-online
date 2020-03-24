@@ -17,6 +17,7 @@ class LoginAdminModel extends CI_Model {
 			anggota.foto,
 			anggota.user_login,
 			anggota.id_jabatan,
+			anggota.flag_ketua_sidang,
 			list_kode.keterangan as nama_jabatan
 		');
 		$this->db->join('list_kode', 'list_kode.group_list = \'jabatan\' AND list_kode.id_list = anggota.id_jabatan', 'left');

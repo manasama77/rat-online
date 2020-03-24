@@ -14,11 +14,31 @@ class RATModel extends CI_Model {
 			rat.id_ketua_sidang,
 			rat.kata_pengantar,
 			rat.status_rat,
-			rat.polling_mulai,
-			rat.polling_akhir,
+			rat.flag_aktif,
 			anggota.nama
 		');
 		$this->db->join('anggota', 'anggota.id = rat.id_ketua_sidang', 'left');
+		$this->db->order_by('id', 'desc');
+		return $this->db->get('rat');
+	}
+
+	public function rat_data_buka()
+	{
+		$this->db->select('
+			rat.id,
+			rat.kode_rat,
+			rat.th_buku,
+			rat.rat_mulai,
+			rat.rat_akhir,
+			rat.id_ketua_sidang,
+			rat.kata_pengantar,
+			rat.status_rat,
+			rat.flag_aktif,
+			anggota.nama
+		');
+		$this->db->join('anggota', 'anggota.id = rat.id_ketua_sidang', 'left');
+		$this->db->where('rat.status_rat', '0');
+		$this->db->order_by('id', 'desc');
 		return $this->db->get('rat');
 	}
 
@@ -88,6 +108,79 @@ class RATModel extends CI_Model {
 		$this->db->delete('respon_rat');
 
 		return TRUE;
+	}
+
+	public function get_vote_pengurus()
+	{
+		$ketua_pengurus_id   = NULL;
+		$ketua_pengurus_nama = NULL;
+		$ketua_pengurus_vote = 0;
+		$sekertaris_id       = NULL;
+		$sekertaris_nama     = NULL;
+		$sekertaris_vote     = 0;
+		$bendahara_id        = NULL;
+		$bendahara_nama      = NULL;
+		$bendahara_vote      = 0;
+
+		// GET ID RAT AKTIF
+		$this->db->select('id');
+		$this->db->where('flag_aktif', 'ya');
+		$arr_rat = $this->db->get('rat');
+
+		$id_rat = $arr_rat->row()->id;
+
+		// COUNT PENGURUS
+		$this->db->select('polling_pengurus.id_anggota, anggota.nama, polling_pengurus.vote');
+		$this->db->join('anggota', 'anggota.id = polling_pengurus.id_anggota', 'left');
+		$this->db->where('polling_pengurus.id_rat', $id_rat);
+		$this->db->where('polling_pengurus.id_jabatan', '1');
+		$arr_ketua_pengurus  = $this->db->get('polling_pengurus', 1, 0);
+		$count_ketua = $arr_ketua_pengurus->num_rows();
+
+		if($count_ketua > 0){
+			$ketua_pengurus_id   = $arr_ketua_pengurus->row()->id_anggota;
+			$ketua_pengurus_nama = $arr_ketua_pengurus->row()->nama;
+			$ketua_pengurus_vote = $arr_ketua_pengurus->row()->vote;
+		}
+
+		// COUNT SEKERTARIS
+		$this->db->select('polling_pengurus.id_anggota, anggota.nama, polling_pengurus.vote');
+		$this->db->join('anggota', 'anggota.id = polling_pengurus.id_anggota', 'left');
+		$this->db->where('polling_pengurus.id_rat', $id_rat);
+		$this->db->where('polling_pengurus.id_jabatan', '2');
+		$arr_sekertaris  = $this->db->get('polling_pengurus', 1, 0);
+		$count_sekertaris = $arr_sekertaris->num_rows();
+
+		if($count_ketua > 0){
+			$sekertaris_id   = $arr_sekertaris->row()->id_anggota;
+			$sekertaris_nama = $arr_sekertaris->row()->nama;
+			$sekertaris_vote = $arr_sekertaris->row()->vote;
+		}
+		
+
+		// COUNT BENDAHARA
+		$this->db->select('polling_pengurus.id_anggota, anggota.nama, polling_pengurus.vote');
+		$this->db->join('anggota', 'anggota.id = polling_pengurus.id_anggota', 'left');
+		$this->db->where('polling_pengurus.id_rat', $id_rat);
+		$this->db->where('polling_pengurus.id_jabatan', '3');
+		$arr_bendahara  = $this->db->get('polling_pengurus', 1, 0);
+		$count_bendahara = $arr_bendahara->num_rows();
+
+		if($count_ketua > 0){
+			$bendahara_id   = $arr_bendahara->row()->id_anggota;
+			$bendahara_nama = $arr_bendahara->row()->nama;
+			$bendahara_vote = $arr_bendahara->row()->vote;
+		}
+
+		return compact('ketua_pengurus_id', 'ketua_pengurus_nama', 'ketua_pengurus_vote', 'sekertaris_id', 'sekertaris_nama', 'sekertaris_vote', 'bendahara_id', 'bendahara_nama', 'bendahara_vote');
+	}
+
+	public function get_prev_pengurus()
+	{
+		$this->db->where('id_jabatan', '1');
+		$this->db->or_where('id_jabatan', '2');
+		$this->db->or_where('id_jabatan', '3');
+		return $this->db->get('anggota');
 	}
 
 }

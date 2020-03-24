@@ -11,7 +11,7 @@
  Target Server Version : 100410
  File Encoding         : 65001
 
- Date: 19/03/2020 04:30:05
+ Date: 24/03/2020 07:11:17
 */
 
 SET NAMES utf8mb4;
@@ -34,16 +34,37 @@ CREATE TABLE `anggota`  (
   `id_jabatan` int(25) NULL DEFAULT NULL COMMENT 'refer tabel list_kode (a.k.a tbl_parameter)',
   `user_login` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `password_login` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `flag_ketua_sidang` enum('ya','tidak') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of anggota
 -- ----------------------------
-INSERT INTO `anggota` VALUES (1, 'Master Admin', 'Bogor', '2020-03-17', 'laki - laki', NULL, NULL, NULL, 'default.png', 0, 'admin', '$2y$10$0lwXy2rpbaWMO4lLTiLmWuWX5ynVpxqhA.ui3MA3BQYd/K9QrK3gW');
-INSERT INTO `anggota` VALUES (3, 'Anggota 1', '', '2020-03-18', 'laki - laki', '', '', '', 'default.png', 9, 'anggota1', '$2y$10$R3t8MUEYsafY/dajHiJ1vu.KepFGqMg1bn0WYOh78WnSTl9sHXIaC');
-INSERT INTO `anggota` VALUES (4, 'anggota2', '', '2020-03-18', 'laki - laki', '', '', '', 'default.png', 1, 'anggota2', '$2y$10$EG9oeERTs/7Y69QA0PsOmuvK0G3oowPNbxbcIZ.PEFAg9O922dEZy');
-INSERT INTO `anggota` VALUES (5, 'anggota3', 'Bogor', '2020-03-18', 'laki - laki', '014198491', 'nskgnsgbiosbio', '07916591', '30cf3a825dcd177e01f514ca831f399c.png', 9, 'anggota3', '$2y$10$34hK2iTe10L58W0whSbWe.rbA5CA2MbKcArKG199v7a.OqRm5uVRW');
+INSERT INTO `anggota` VALUES (1, 'Master Admin', 'Bogor', '2020-03-17', 'laki - laki', NULL, NULL, NULL, 'default.png', 0, 'admin', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (2, 'Ex Ketua Pengurus', 'Bogor', '2020-03-17', 'laki - laki', '123456', 'test alamat', '123456', 'default.png', 1, 'ex_ketua_pengurus', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'ya');
+INSERT INTO `anggota` VALUES (3, 'Ex Sekertaris', 'Bogor', '2020-03-17', 'laki - laki', '123456', 'test alamat', '123456', 'default.png', 2, 'ex_sekertaris', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (4, 'Ex Bendahara', 'Bogor', '2020-03-17', 'laki - laki', '123456', 'test alamat', '123456', 'default.png', 3, 'ex_bendahara', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (5, 'Anggota1', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota1', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (6, 'Anggota2', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota2', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (7, 'Anggota3', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota3', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (8, 'Anggota4', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota4', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (9, 'Anggota5', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota5', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (10, 'Anggota6', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota6', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (11, 'Anggota7', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota7', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (12, 'Anggota8', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota8', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (13, 'Anggota9', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota9', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (14, 'Anggota10', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'anggota10', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (15, 'Karyawan1', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan1', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (16, 'Karyawan2', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan2', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (17, 'Karyawan3', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan3', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (18, 'Karyawan4', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan4', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (19, 'Karyawan5', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan5', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (20, 'Karyawan6', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan6', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (21, 'Karyawan7', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan7', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (22, 'Karyawan8', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan8', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (23, 'Karyawan9', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan9', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
+INSERT INTO `anggota` VALUES (24, 'Karyawan10', 'Bogor', '2020-03-17', 'laki - laki', '1234567890', 'Test Alamat', '08123456789', 'default.png', 9, 'karyawan10', '$2y$10$DgHrkyl.nELfv9HiXpZ2Ieau9RGwCNYhIsg1duVUEk/vDNQMnjila', 'tidak');
 
 -- ----------------------------
 -- Table structure for anggota_polling
@@ -55,12 +76,20 @@ CREATE TABLE `anggota_polling`  (
   `id_pemilih` int(11) NULL DEFAULT NULL,
   `id_pilihan` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of anggota_polling
+-- Table structure for anggota_polling_pengurus
 -- ----------------------------
-INSERT INTO `anggota_polling` VALUES (5, 2, 3, 4);
+DROP TABLE IF EXISTS `anggota_polling_pengurus`;
+CREATE TABLE `anggota_polling_pengurus`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_rat` int(11) NULL DEFAULT NULL,
+  `id_pemilih` int(11) NULL DEFAULT NULL,
+  `id_pilihan` int(11) NULL DEFAULT NULL,
+  `id_jabatan` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for file_rat
@@ -74,13 +103,7 @@ CREATE TABLE `file_rat`  (
   `file_laporan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `flag_respon` enum('ya','tidak') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of file_rat
--- ----------------------------
-INSERT INTO `file_rat` VALUES (3, 2, 3, 'SKB Revisi Libur Nasional 2020', 'SKB_Revisi_Libur_Nasional_2020__pdf.pdf', 'ya');
-INSERT INTO `file_rat` VALUES (4, 2, 1, 'Surat Pemberitahuan Peserta (Owner)', 'Surat_Pemberitahuan_Peserta_(Owner).pdf', 'tidak');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for koperasi
@@ -137,12 +160,20 @@ CREATE TABLE `polling`  (
   `id_anggota` int(11) NULL DEFAULT NULL,
   `vote` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of polling
+-- Table structure for polling_pengurus
 -- ----------------------------
-INSERT INTO `polling` VALUES (3, 2, 4, 1);
+DROP TABLE IF EXISTS `polling_pengurus`;
+CREATE TABLE `polling_pengurus`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_rat` int(11) NULL DEFAULT NULL,
+  `id_anggota` int(11) NULL DEFAULT NULL,
+  `vote` int(11) NULL DEFAULT NULL,
+  `id_jabatan` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for rat
@@ -157,15 +188,16 @@ CREATE TABLE `rat`  (
   `id_ketua_sidang` int(11) NULL DEFAULT NULL COMMENT 'refer table anggota',
   `kata_pengantar` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `status_rat` enum('0','1','2') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `polling_mulai` date NULL DEFAULT NULL,
-  `polling_akhir` date NULL DEFAULT NULL,
+  `flag_aktif` enum('ya','tidak') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `berita_acara` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_prev_ketua_pengurus` int(11) NULL DEFAULT NULL,
+  `id_prev_sekertaris` int(11) NULL DEFAULT NULL,
+  `id_prev_bendahara` int(11) NULL DEFAULT NULL,
+  `id_new_ketua_pengurus` int(11) NULL DEFAULT NULL,
+  `id_new_sekertaris` int(11) NULL DEFAULT NULL,
+  `id_new_bendahara` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of rat
--- ----------------------------
-INSERT INTO `rat` VALUES (2, 'R0001', 2020, '2020-03-19', '2020-03-25', 4, 'Ini Judul Kata Pengantar<br />\r\nSedangkan ini isi Kata pengantarnya, yang akan menghantarkan anda tertidur lelap dalam kenangan sepanjang masa, yang abadi. Tak kukira ini akan segera berakhir dalam waktu 1 malam saja. Ingin ku merenung sejenak di kegelapan malam ini, menanti fajar kan datang, lalu senja berganti. Begitu lah kisah hidup anak muda yang sedang melewati ujian kehidupan ini. Semoga akhir yang indah menjadi nyata, dan disana tempat ku beristirahat selamanya, bukan di tempat ini. Semangat...', '1', '2020-03-19', '2020-03-20');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for respon_rat
@@ -179,11 +211,6 @@ CREATE TABLE `respon_rat`  (
   `id_respon` int(11) NULL DEFAULT NULL COMMENT 'refer tabel list_kode (a.k.a tbl_parameter)',
   `ket_respon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of respon_rat
--- ----------------------------
-INSERT INTO `respon_rat` VALUES (5, 2, 3, 3, 1, 'Ya saya sangat Setuju Sekali');
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

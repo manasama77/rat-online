@@ -50,12 +50,13 @@ class LoginAdminController extends CI_Controller {
 				$arr  = $this->mmain->get_user_info($username);
 
 				$data_session = [
-					UNQ.'id'           => $arr->row()->id,
-					UNQ.'nama'         => $arr->row()->nama,
-					UNQ.'id_jabatan'   => $arr->row()->id_jabatan,
-					UNQ.'nama_jabatan' => $arr->row()->nama_jabatan,
-					UNQ.'user_login'   => $arr->row()->user_login,
-					UNQ.'foto'         => $arr->row()->foto,
+					UNQ.'id'                => $arr->row()->id,
+					UNQ.'nama'              => $arr->row()->nama,
+					UNQ.'id_jabatan'        => $arr->row()->id_jabatan,
+					UNQ.'nama_jabatan'      => $arr->row()->nama_jabatan,
+					UNQ.'user_login'        => $arr->row()->user_login,
+					UNQ.'foto'              => $arr->row()->foto,
+					UNQ.'flag_ketua_sidang' => $arr->row()->flag_ketua_sidang,
 				];
 				
 				$this->session->set_userdata($data_session);
@@ -74,6 +75,7 @@ class LoginAdminController extends CI_Controller {
 			UNQ.'nama_jabatan',
 			UNQ.'user_login',
 			UNQ.'foto',
+			UNQ.'flag_ketua_sidang',
 		];
 
 		$this->session->unset_userdata($data);
@@ -117,23 +119,114 @@ class LoginAdminController extends CI_Controller {
 	// DEVELOPMENT PURPOSE ONLY
 	public function init()
 	{
+		$this->mcore->truncate('anggota');
+		$this->mcore->truncate('anggota_polling');
+		$this->mcore->truncate('anggota_polling_pengurus');
+		$this->mcore->truncate('file_rat');
+		$this->mcore->truncate('polling');
+		$this->mcore->truncate('polling_pengurus');
+		$this->mcore->truncate('rat');
+		$this->mcore->truncate('respon_rat');
 		$password = password_hash('admin123)'.UYAH, PASSWORD_DEFAULT);
-		$data = [
-			'nama'           => 'Master Admin',
-			'tempat_lahir'   => 'Bogor',
-			'tanggal_lahir'  => '2020-03-17',
-			'jenis_kelamin'  => 'laki - laki',
-			'no_ktp'         => NULL,
-			'alamat'         => NULL,
-			'no_telp'        => NULL,
-			'foto'           => 'default.png',
-			'id_jabatan'     => 0,
-			'user_login'     => 'admin',
-			'password_login' => $password,
+
+		$data[] = [
+			'nama'              => 'Master Admin',
+			'tempat_lahir'      => 'Bogor',
+			'tanggal_lahir'     => '2020-03-17',
+			'jenis_kelamin'     => 'laki - laki',
+			'no_ktp'            => NULL,
+			'alamat'            => NULL,
+			'no_telp'           => NULL,
+			'foto'              => 'default.png',
+			'id_jabatan'        => '0',
+			'user_login'        => 'admin',
+			'password_login'    => $password,
+			'flag_ketua_sidang' => 'tidak',
 		];
 
-		$truncate = $this->mcore->truncate('anggota');
-		$exec = $this->mcore->store('anggota', $data);
+		$data[] = [
+			'nama'              => 'Ex Ketua Pengurus',
+			'tempat_lahir'      => 'Bogor',
+			'tanggal_lahir'     => '2020-03-17',
+			'jenis_kelamin'     => 'laki - laki',
+			'no_ktp'            => '123456',
+			'alamat'            => 'test alamat',
+			'no_telp'           => '123456',
+			'foto'              => 'default.png',
+			'id_jabatan'        => '1',
+			'user_login'        => 'ex_ketua_pengurus',
+			'password_login'    => $password,
+			'flag_ketua_sidang' => 'ya',
+		];
+
+		$data[] = [
+			'nama'              => 'Ex Sekertaris',
+			'tempat_lahir'      => 'Bogor',
+			'tanggal_lahir'     => '2020-03-17',
+			'jenis_kelamin'     => 'laki - laki',
+			'no_ktp'            => '123456',
+			'alamat'            => 'test alamat',
+			'no_telp'           => '123456',
+			'foto'              => 'default.png',
+			'id_jabatan'        => '2',
+			'user_login'        => 'ex_sekertaris',
+			'password_login'    => $password,
+			'flag_ketua_sidang' => 'tidak',
+		];
+
+		$data[] = [
+			'nama'              => 'Ex Bendahara',
+			'tempat_lahir'      => 'Bogor',
+			'tanggal_lahir'     => '2020-03-17',
+			'jenis_kelamin'     => 'laki - laki',
+			'no_ktp'            => '123456',
+			'alamat'            => 'test alamat',
+			'no_telp'           => '123456',
+			'foto'              => 'default.png',
+			'id_jabatan'        => '3',
+			'user_login'        => 'ex_bendahara',
+			'password_login'    => $password,
+			'flag_ketua_sidang' => 'tidak',
+		];
+
+		for ($i=1; $i <= 10; $i++) { 
+			$data[] = [
+				'nama'              => 'Anggota'.$i,
+				'tempat_lahir'      => 'Bogor',
+				'tanggal_lahir'     => '2020-03-17',
+				'jenis_kelamin'     => 'laki - laki',
+				'no_ktp'            => '1234567890',
+				'alamat'            => 'Test Alamat',
+				'no_telp'           => '08123456789',
+				'foto'              => 'default.png',
+				'id_jabatan'        => '9',
+				'user_login'        => 'anggota'.$i,
+				'password_login'    => $password,
+				'flag_ketua_sidang' => 'tidak',
+			];
+		}
+
+		for ($y=1; $y <= 10; $y++) { 
+			$data[] = [
+				'nama'              => 'Karyawan'.$y,
+				'tempat_lahir'      => 'Bogor',
+				'tanggal_lahir'     => '2020-03-17',
+				'jenis_kelamin'     => 'laki - laki',
+				'no_ktp'            => '1234567890',
+				'alamat'            => 'Test Alamat',
+				'no_telp'           => '08123456789',
+				'foto'              => 'default.png',
+				'id_jabatan'        => '9',
+				'user_login'        => 'karyawan'.$y,
+				'password_login'    => $password,
+				'flag_ketua_sidang' => 'tidak',
+			];
+		}
+
+		// print_r($data);
+		// exit;
+
+		$exec = $this->mcore->store_batch('anggota', $data);
 
 		if($exec){
 			echo "Init Complete";
