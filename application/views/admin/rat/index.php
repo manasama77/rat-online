@@ -79,19 +79,15 @@
 										</td>
 										<td><?=ucwords($key->flag_aktif);?></td>
 										<td class="text-center">
-											<div class="btn-group">
-												<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">Action</button>
-												<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">
-													<span class="caret"></span>
-													<span class="sr-only">Toggle Dropdown</span>
-												</button>
-												<ul class="dropdown-menu pull-right" role="menu">
-													<?php
-													if(in_array($this->session->userdata(UNQ.'id_jabatan'), ['0', '1'])){
-														?>
-														<?php
-														if($key->status_rat == '0' && $key->flag_aktif == 'tidak'){
-															?>
+											<?php if(($key->flag_aktif == 'ya' && $this->session->userdata(UNQ.'id_jabatan') == '9') || in_array($this->session->userdata(UNQ.'id_jabatan'), ['0', '1']) || ($key->flag_aktif == 'tidak' && $key->status_rat == '2' )){ ?>
+												<div class="btn-group">
+													<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">Action</button>
+													<button type="button" class="btn btn-success btn-flat dropdown-toggle" data-toggle="dropdown">
+														<span class="caret"></span>
+														<span class="sr-only">Toggle Dropdown</span>
+													</button>
+													<ul class="dropdown-menu pull-right" role="menu">
+														<?php if(in_array($this->session->userdata(UNQ.'id_jabatan'), ['0', '1']) == TRUE && $key->status_rat == '0' && $key->flag_aktif == 'tidak'){ ?>
 															<li>
 																<a href="<?=site_url();?>admin/rat/edit/<?=$key->id;?>" title="Edit" disabled>
 																	<i class="fa fa-pencil"></i> Edit
@@ -102,56 +98,38 @@
 																	<i class="fa fa-trash"></i> Delete
 																</a>
 															</li>
-															<li class="divider"></li>
-														<?php } ?>
-														<?php
-														if($key->status_rat == '0' && $key->flag_aktif == 'tidak'){
-															?>
+															<li class="divider"> </li>
 															<li>
 																<a href="javascript:;" onclick="aktifkanOM('<?=$key->id;?>', '<?=$key->kode_rat;?>', 'aktifkan');" title="Aktifkan RAT">
 																	<i class="fa fa-check"></i> Aktifkan
 																</a>
 															</li>
-															<li class="divider"></li>
+															<li class="divider"> </li>
 														<?php } ?>
-														<?php
-														if($key->status_rat == '0' && $key->flag_aktif == 'ya'){
-															?>
+														<?php if(in_array($this->session->userdata(UNQ.'id_jabatan'), ['0', '1']) == TRUE && $key->status_rat == '0' && $key->flag_aktif == 'ya'){ ?>
 															<li>
 																<a href="javascript:;" onclick="aktifkanOM('<?=$key->id;?>', '<?=$key->kode_rat;?>', 'nonaktifkan');" title="Aktifkan RAT">
 																	<i class="fa fa-times"></i> Non Aktifkan
 																</a>
 															</li>
 															<li class="divider"></li>
+															<li>
+																<a href="<?=site_url();?>admin/rat/penetapan/<?=$key->id;?>/<?=$key->kode_rat;?>" title="Tetapkan Ketua Berdasarkan Polling">
+																	<i class="fa fa-gavel"></i> Tetapkan Ketua Sidang Berdasarkan Polling
+																</a>
+															</li>
+															<li class="divider"></li>
 														<?php } ?>
-														<?php
-														if($key->status_rat == 0){
-															if($this->session->userdata('flag_ketua_sidang') == 'ya'){
-																?>
-																<li>
-																	<a href="<?=site_url();?>admin/rat/penetapan/<?=$key->id;?>" title="Tetapkan Ketua Berdasarkan Polling">
-																		<i class="fa fa-gavel"></i> Tetapkan Ketua Sidang Berdasarkan Polling
-																	</a>
-																</li>
-																<li class="divider"></li>
-																<?php 
-															}
-														} 
-														?>
-													<?php } ?>
-													<li>
-														<?php
-														if($key->flag_aktif == 'ya'){
-															?>
-															<a href="<?=site_url();?>admin/rat/detail/<?=$key->id;?>" title="Lihat">
-																<i class="fa fa-eye"></i> Lihat
-															</a>
-															<?php
-														}
-														?>
-													</li>
-												</ul>
-											</div>
+														<?php if((in_array($this->session->userdata(UNQ.'id_jabatan'), ['0', '1']) == TRUE) || ($this->session->userdata(UNQ.'id_jabatan') == '9' && $key->status_rat == '0' && $key->flag_aktif == 'ya') || ($this->session->userdata(UNQ.'id_jabatan') == '9' && in_array($key->status_rat, ['1', '2']) == TRUE)){ ?>
+															<li>
+																<a href="<?=site_url();?>admin/rat/detail/<?=$key->id;?>" title="Lihat">
+																	<i class="fa fa-eye"></i> Lihat
+																</a>
+															</li>
+														<?php } ?>
+													</ul>
+												</div>
+											<?php } ?>
 										</td>
 									</tr>
 								<?php } ?>

@@ -1,0 +1,21 @@
+RAT - [kode rat]
+tahun buku [th_buku]
+
+BERITA ACARA
+[HTML berita_acara]
+
+<page break>
+
+h3:Pengrus
+// table
+ketua pengurus
+sebelum | sesudah
+A       | B
+
+sekertaris
+sebelum | sesudah
+A       | B
+
+bendahara
+sebelum | sesudah
+A       | B

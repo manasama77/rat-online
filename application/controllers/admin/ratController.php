@@ -12,14 +12,12 @@ class RatController extends CI_Controller {
 
 	public function index()
 	{
-		$data['title']             = 'Hal List RAT';
-		$data['content']           = 'rat/index';
-		$data['vitamin']           = 'rat/vitamin';
-		$data['arr']               = $this->mmain->rat_data();
-		$data['polling_mulai_obj'] = new DateTime();
-		$data['polling_akhir_obj'] = new DateTime();
-		$data['rat_mulai_obj']     = new DateTime();
-		$data['rat_akhir_obj']     = new DateTime();
+		$data['title']         = 'Hal List RAT';
+		$data['content']       = 'rat/index';
+		$data['vitamin']       = 'rat/vitamin';
+		$data['arr']           = $this->mmain->rat_data();
+		$data['rat_mulai_obj'] = new DateTime();
+		$data['rat_akhir_obj'] = new DateTime();
 
 		$this->template->template($data);
 	}
@@ -48,9 +46,9 @@ class RatController extends CI_Controller {
 
 	public function create()
 	{
-		$data['title']         = 'Regis RAT';
-		$data['content']       = 'rat/form';
-		$data['vitamin']       = 'rat/form_vitamin';
+		$data['title']   = 'Regis RAT';
+		$data['content'] = 'rat/form';
+		$data['vitamin'] = 'rat/form_vitamin';
 
 		$this->template->template($data);
 	}

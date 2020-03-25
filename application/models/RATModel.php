@@ -183,6 +183,29 @@ class RATModel extends CI_Model {
 		return $this->db->get('anggota');
 	}
 
+	public function data_rat_rekap($id_rat)
+	{
+		$this->db->select('
+			rat.kode_rat,
+			rat.th_buku,
+			rat.rat_mulai,
+			rat.rat_akhir,
+			(select nama from anggota as a1 where a1.id = rat.id_ketua_sidang) as ketua_sidang,
+			rat.kata_pengantar,
+			rat.status_rat,
+			rat.flag_aktif,
+			rat.berita_acara,
+			(select nama from anggota as a2 where a2.id = rat.id_prev_ketua_pengurus) as prev_ketua_pengurus,
+			(select nama from anggota as a3 where a3.id = rat.id_prev_sekertaris) as prev_sekertaris,
+			(select nama from anggota as a4 where a4.id = rat.id_prev_bendahara) as prev_bendahara,
+			(select nama from anggota as a5 where a5.id = rat.id_new_ketua_pengurus) as new_ketua_pengurus,
+			(select nama from anggota as a6 where a6.id = rat.id_new_sekertaris) as new_sekertaris,
+			(select nama from anggota as a7 where a7.id = rat.id_new_bendahara) as new_bendahara,
+		');
+		$this->db->where('rat.id', $id_rat);
+		return $this->db->get('rat');
+	}
+
 }
 
 /* End of file RATModel.php */

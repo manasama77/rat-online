@@ -37,7 +37,7 @@ $route['admin/anggota/destroy/(:num)'] = 'admin/AnggotaController/destroy/$1';
 
 // ADMIN RAT
 $route['admin/rat']                                = 'admin/RatController/index';
-$route['admin/rat/aktifkan/(:num)/(:any)']             = 'admin/RatController/aktifkan/$1/$2';
+$route['admin/rat/aktifkan/(:num)/(:any)']         = 'admin/RatController/aktifkan/$1/$2';
 $route['admin/rat/pembukaan']                      = 'admin/RatController/pembukaan';
 $route['admin/rat/penetapan/(:num)/(:any)']        = 'admin/RatController/penetapan/$1/$2';
 $route['admin/rat/penetapan_manual/(:num)/(:any)'] = 'admin/RatController/penetapan_manual/$1/$2';
@@ -57,3 +57,7 @@ $route['admin/rat/update']['post']                 = 'admin/RatController/update
 $route['admin/rat/vote_pengurus']                  = 'admin/RatController/vote_pengurus';
 $route['admin/rat/store_vote_pengurus']['post']    = 'admin/RatController/store_vote_pengurus';
 $route['admin/rat/store_penutupan']['post']        = 'admin/RatController/store_penutupan';
+
+// ADMIN REKAP
+$route['admin/rekap']            = 'admin/RekapController/index';
+$route['admin/rekap/pdf/(:num)'] = 'admin/RekapController/pdf/$1';
