@@ -8,7 +8,7 @@ class RekapController extends CI_Controller {
 		parent::__construct();
 		$this->load->library('TemplateAdmin', NULL, 'template');
 		$this->load->model('RATModel', 'mmain');
-		$this->load->library('pdf');
+		$this->load->library('Pdf');
 	}
 
 	public function index()
