@@ -1,7 +1,9 @@
 <?php
-class pdf {
+class Pdf
+{
 
-	function __construct() {
+	function __construct()
+	{
 		include_once APPPATH . '/third_party/fpdf/fpdf.php';
 	}
 }
